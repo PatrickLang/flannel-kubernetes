@@ -43,6 +43,7 @@ Currently supported Windows nodes:
 ### Running with Vagrant
 
 1. If using Hyper-V, make sure you have an external switch created
+1. `vagrant plugin install vagrant-hostmanager`
 1. Build the `WindowsServer2019Docker` box using the Packer scripts - [build_windows_2019_docker.ps1](https://github.com/PatrickLang/packer-windows/blob/updated-eval/build_windows_2019_docker.ps1)
 1. `vagrant box add --name WindowsServer2019Docker windows_2019_docker_hyperv.box`
 1. `vagrant up`

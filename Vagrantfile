@@ -1,7 +1,12 @@
 Vagrant.configure("2") do |config|
 
+  # See https://github.com/hashicorp/vagrant/issues/8796 - workaround for ansible_local
+  config.hostmanager.enabled = true
+  config.hostmanager.manage_guest = true
+
   config.vm.define "nodea" do |nodea|
     nodea.vm.box = "bento/ubuntu-16.04"
+    nodea.hostmanager.aliases = %w(nodea)
     nodea.vm.provider "hyperv" do |hv|
       hv.vmname = "K8s-nodea"
       hv.memory = 1024
@@ -18,6 +23,7 @@ Vagrant.configure("2") do |config|
 
 
   config.vm.define "win1" do |win1|
+    win1.hostmanager.aliases = %w(win1)
     win1.vm.box = "WindowsServer2019Docker"
     win1.vm.provider "hyperv" do |hv|
       hv.vmname = "K8s-win1"
@@ -32,6 +38,7 @@ Vagrant.configure("2") do |config|
 
 
   config.vm.define "master" do |master|
+    master.hostmanager.aliases = %w(master)
     master.vm.box = "bento/ubuntu-16.04"
     master.vm.provider "hyperv" do |hv|
       hv.vmname = "K8s-master"
@@ -44,6 +51,8 @@ Vagrant.configure("2") do |config|
       rsync__exclude: ".git/"
 
     master.vm.hostname = "master.localdomain"
+
+    config.vm.provision :hostmanager
 
     master.vm.provision :ansible_local do |ansible|
       ansible.playbook = "kubernetes-cluster.yml"
