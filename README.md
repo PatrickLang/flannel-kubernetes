@@ -40,6 +40,14 @@ Currently supported Linux nodes:
 Currently supported Windows nodes:
 - Windows Server 2019 LTSC and build version 1809 (OS Version 10.0.17763.0)
 
+### Running with Vagrant
+
+1. If using Hyper-V, make sure you have an external switch created
+1. Build the `WindowsServer2019Docker` box using the Packer scripts - [build_windows_2019_docker.ps1](https://github.com/PatrickLang/packer-windows/blob/updated-eval/build_windows_2019_docker.ps1)
+1. `vagrant box add --name WindowsServer2019Docker windows_2019_docker_hyperv.box`
+1. `vagrant up`
+  - If using Hyper-V, choose the external switch when prompted
+
 ## Ports that have to be opened on public clouds when using the playbooks
 
 The following ports need to be opened if we access the cluster machines via the public address.
