@@ -49,7 +49,8 @@ Vagrant.configure("2") do |config|
       ansible.playbook = "kubernetes-cluster.yml"
       ansible.verbose = true
       ansible.install = true
-      ansible.inventory_path = "inventory"
+      # ansible.inventory_path = "inventory"
+      ansible.limit = "all"
       ansible.groups = {
 	      "kube-master" => ["master"],
 	      "kube-minions-linux" => ["nodea"],
